@@ -8,11 +8,13 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { AuthenticationService } from './service/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { FamilyHeaderComponent } from './components/family-header/family-header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent
+    NavbarComponent,
+    FamilyHeaderComponent
   ],
   imports: [
     BrowserModule,
