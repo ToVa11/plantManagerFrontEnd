@@ -1,0 +1,220 @@
+body{
+  margin-top:20px;
+  background:#eee;
+}
+.has-shadow {
+  box-shadow: 0 1px 15px 1px rgba(52,40,104,.08);
+}
+.widget-body {
+  padding: 1.4rem
+}
+
+.flex-row>[class*='col-']>.widget-image {
+  height: 100%
+}
+.widget-image:hover .quick-actions.hover {
+  display: block
+}
+.rounded-widget .widget-image {
+  border-radius: 4px
+}
+.widget-image {
+  background: #fff;
+  border-radius: 0;
+  border: none;
+  margin-bottom: 30px;
+  position: relative
+}
+
+.contact-card-2 {
+  margin-top: 0;
+  position: relative
+}
+
+.contact-card-2 .cover-bg {
+  display: block
+}
+
+.contact-card-2 .cover-bg>img {
+  display: block;
+  margin-bottom: 0;
+  transition: all .25s ease-in-out
+}
+
+.contact-card-2 .cover-image {
+  display: block;
+  position: absolute;
+  width: 100px;
+  top: -50px;
+  left: 0;
+  right: 0
+}
+
+.contact-card-2 .cover-image>img {
+  display: block;
+  width: 100px;
+  border: 6px solid #fff;
+  transition: all .25s ease-in-out
+}
+
+.contact-card-2 .widget-body {
+  position: relative
+}
+
+.contact-card-2 .name {
+  color: #5d5386;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  text-decoration: none;
+  text-align: center
+}
+
+.contact-card-2 .job {
+  color: #aea9c3;
+  font-size: 1rem;
+  text-align: center
+}
+
+.contact-card-2 .stats {
+  margin-top: 1.4rem
+}
+
+.contact-card-2 .stats .counter {
+  display: block;
+  color: #5d5386;
+  font-size: 1.6rem;
+  font-weight: 600;
+  text-align: center
+}
+
+.contact-card-2 .stats .text {
+  color: #aea9c3;
+  display: block;
+  text-align: center
+}
+
+.contact-card-2 .btn-group {
+  padding: 2rem 0 1.4rem
+}
+
+.contact-card-2 .quick-about {
+  text-align: center;
+  margin-top: 1.4rem
+}
+
+.contact-card-2 .quick-about h4 {
+  color: #2c304d;
+  font-weight: 600;
+  margin-bottom: .4rem
+}
+
+.contact-card-2 .quick-about p {
+  font-size: .9rem;
+  margin: 0
+}
+
+.contact-card-2 .owl-dots {
+  float: left;
+  margin-top: 1.4rem;
+  text-align: center;
+  width: 100%
+}
+
+.contact-card-2 .owl-dots .owl-dot {
+  border: 2px solid #aea9c3;
+  border-radius: 50%;
+  display: inline-block;
+  height: 12px;
+  margin: 0 .3rem;
+  width: 12px;
+  transition: all 0.3s ease 0s
+}
+
+.contact-card-2 .owl-dots .owl-dot:hover {
+  border-color: #e76c90
+}
+
+.contact-card-2 .owl-dots .owl-dot.active {
+  border: 2px solid #e76c90
+}
+.quick-actions.hover {
+  z-index: 999;
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  display: none;
+}
+.quick-actions .dropdown-toggle {
+  color: #98a8b4;
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 1.7rem;
+}
+.quick-actions .dropdown-menu {
+  border: none;
+  min-width: auto;
+  font-size: 1rem;
+  border-radius: 4px;
+  padding: 1.4rem 1.8rem;
+  text-align: left;
+  box-shadow: 1px 1px 30px rgba(0,0,0,.15);
+}
+.quick-actions .dropdown-menu .dropdown-item {
+  padding: .5rem 0;
+}
+.quick-actions .dropdown-menu a {
+  color: #2c304d;
+  font-weight: 500;
+}
+.quick-actions .dropdown-menu a i {
+  font-size: 1.4rem;
+  vertical-align: -2px;
+  color: #2c304d;
+  margin-right: .7rem;
+  transition: all 0.4s ease;
+}
+.quick-actions .dropdown-menu .dropdown-item {
+  padding: .5rem 0;
+}
+.quick-actions .dropdown-menu a {
+  color: #2c304d;
+  font-weight: 500;
+}
+.contact-card-2 .cover-image {
+  display: block;
+  position: absolute;
+  width: 100px;
+  top: -50px;
+  left: 0;
+  right: 0;
+}
+.contact-card-2 .name {
+  color: #5d5386;
+  font-size: 1.4rem;
+  font-weight: 600;
+  padding: 0;
+  margin-top: 3rem;
+  margin-bottom: 0;
+  text-decoration: none;
+  text-align: center;
+}
+.btn-gradient-01, .btn-gradient-01 a {
+  background: #e23f83;
+  background: linear-gradient(to right,#e23f83 0%,#ea5844 100%);
+  background-size: 200% auto;
+  font-weight: 600;
+  transition: 0.5s;
+  color: #fff;
+  border: 0 none;
+  padding: 12px 20px;
+}
+.btn-shadow, .btn-shadow a {
+  color: #5d5386;
+  background-color: #fff;
+  border-color: #fff;
+  box-shadow: 0 1px 15px 1px rgba(52,40,104,.15);
+}

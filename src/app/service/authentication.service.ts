@@ -26,12 +26,19 @@ export class AuthenticationService {
     localStorage.setItem('tokenPlantManagerApp', token);
   }
 
-  addUserToLocalStorage(user: User) {
+  public getToken(): string {
+    return this.token;
+  }
+  public loadToken(): void {
+    this.token = localStorage.getItem('tokenPlantManagerApp');
+  }
+
+  addUserToLocalStorage(user: User): void {
     localStorage.setItem('loggedInUser', JSON.stringify(user));
   }
 
-  public clearUserAndTokenFromLocalStorage() {
-    localStorage.removeItem('userPlantManagerApp');
+  public clearUserAndTokenFromLocalStorage():void {
+    localStorage.removeItem('loggedInUser');
     localStorage.removeItem('tokenPlantManagerApp');
   }
 
