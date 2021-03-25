@@ -9,7 +9,7 @@ import { FamilyPlantsListComponent } from '../family-plants-list/family-plants-l
   selector: 'app-add-plant-family',
   templateUrl: './add-plant-family.component.html',
   styleUrls: ['./add-plant-family.component.css'],
-  providers: [FamilyService]
+  providers: []
 })
 export class AddPlantFamilyComponent implements OnInit {
 
@@ -24,6 +24,7 @@ export class AddPlantFamilyComponent implements OnInit {
       (response) => {
         document.getElementById('dismissModalBtn').click();
         familyForm.reset();
+        this.familyService.addFamilyToFamiliesSubject(response);
       }
     )
   }

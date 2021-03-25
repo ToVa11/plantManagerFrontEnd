@@ -7,7 +7,7 @@ import { FamilyService } from 'src/app/service/family.service';
   selector: 'app-family-plants-list',
   templateUrl: './family-plants-list.component.html',
   styleUrls: ['./family-plants-list.component.css'],
-  providers: [FamilyService]
+  providers: []
 })
 export class FamilyPlantsListComponent implements OnInit {
 
@@ -16,16 +16,15 @@ export class FamilyPlantsListComponent implements OnInit {
   constructor(private familyService: FamilyService) { }
 
   ngOnInit(): void {
+    this.familyService.getFamilies().subscribe(
+      (families) => { this.familyService.setFamilies(families) }
+    );
     this.getFamilies();
 
   }
 
   public getFamilies() {
-    this.familyService.getFamilies().subscribe(
-      (response) => {
-        this.families = response;
-      }
-    )
+    this.familyService.families$.subscribe(families => this.families = families);
   }
 
 
