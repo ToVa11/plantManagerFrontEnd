@@ -27,7 +27,7 @@ export class FamilyService {
   }
 
   public addFamily(family: Family): Observable<Family> {
-    family.plants = [];
+    // family.plants = [];
     return this.http.post<Family>(`${this.host}/family/add`,family);
   }
 
