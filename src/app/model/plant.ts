@@ -9,6 +9,7 @@ export class Plant {
   public needsSpraying: boolean;
   public remarks: Text;
   public family: Family;
+  public headerImageUrl: string;
   
   constructor(id:number,name:string,amountOfWater: string, amountOfLight: string,
     needsSpraying: boolean, remarks: Text, family:Family ) {

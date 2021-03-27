@@ -14,6 +14,7 @@ import { PlantInfoComponent } from './components/plant-info/plant-info.component
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AddPlantFamilyComponent } from './components/add-plant-family/add-plant-family.component';
 import { FamilyService } from './service/family.service';
+import { AddPlantComponent } from './components/add-plant/add-plant.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FamilyService } from './service/family.service';
     FamilyHeaderComponent,
     FamilyPlantsListComponent,
     PlantInfoComponent,
-    AddPlantFamilyComponent
+    AddPlantFamilyComponent,
+    AddPlantComponent
   ],
   imports: [
     BrowserModule,

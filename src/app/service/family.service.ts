@@ -18,6 +18,10 @@ export class FamilyService {
   constructor(private http: HttpClient) { }
 
   public getFamilies(): Observable<Family[]> {
+    return this.http.get<Family[]>(`${this.host}/family/list`);
+  }
+
+  public getFamilyNames(): Observable<Family[]> {
     return this.http.get<Family[]>(`${this.host}/family/listNames`);
   }
 
@@ -27,7 +31,6 @@ export class FamilyService {
   }
 
   public addFamily(family: Family): Observable<Family> {
-    // family.plants = [];
     return this.http.post<Family>(`${this.host}/family/add`,family);
   }
 
