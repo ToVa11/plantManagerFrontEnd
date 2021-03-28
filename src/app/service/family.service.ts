@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Family } from '../model/family';
+import { Plant } from '../model/plant';
 
 
 @Injectable({
@@ -36,6 +37,11 @@ export class FamilyService {
 
   public addFamilyToFamiliesSubject(family: Family) {
     this.families.push(family);
+    this.familiesSubject.next(this.families);
+  }
+
+  public addPlantToFamiliesSubject(plant: Plant) {
+    let family = this.families.find(family => family.id == plant.family.id).plants.push(plant);
     this.familiesSubject.next(this.families);
   }
 

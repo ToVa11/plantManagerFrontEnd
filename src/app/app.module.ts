@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthenticationService } from './service/authentication.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -15,6 +15,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AddPlantFamilyComponent } from './components/add-plant-family/add-plant-family.component';
 import { FamilyService } from './service/family.service';
 import { AddPlantComponent } from './components/add-plant/add-plant.component';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { AddPlantComponent } from './components/add-plant/add-plant.component';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    Ng2ImgMaxModule,
+    ReactiveFormsModule
   ],
   providers: [
     FamilyService,
