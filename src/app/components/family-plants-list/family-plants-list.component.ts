@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { Family } from 'src/app/model/family';
 import { FamilyService } from 'src/app/service/family.service';
 
@@ -9,11 +9,15 @@ import { FamilyService } from 'src/app/service/family.service';
   styleUrls: ['./family-plants-list.component.css'],
   providers: []
 })
-export class FamilyPlantsListComponent implements OnInit {
+export class FamilyPlantsListComponent implements OnInit, OnDestroy {
 
   public families: Family[] = [];
+  private subscriptions: Subscription[] = [];
 
   constructor(private familyService: FamilyService) { }
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub=>sub.unsubscribe());
+  }
 
   ngOnInit(): void {
     this.familyService.getFamilies().subscribe(
@@ -24,7 +28,9 @@ export class FamilyPlantsListComponent implements OnInit {
   }
 
   public getFamilies() {
-    this.familyService.families$.subscribe(families => this.families = families);
+    this.subscriptions.push(
+      this.familyService.families$.subscribe(families => this.families = families)
+    );
   }
 
 
