@@ -33,7 +33,7 @@ export class PlantService {
     return formData;
   }
 
-  public deletePlant(plant: Plant) {
-    return this.http.post(`${this.host}/plant/delete`, plant);
+  public deletePlant(id: number) {    
+    return this.http.delete(`${this.host}/plant/delete/${id}`);
   }
 }

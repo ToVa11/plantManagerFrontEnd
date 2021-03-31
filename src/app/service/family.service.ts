@@ -9,7 +9,8 @@ import { Plant } from '../model/plant';
 @Injectable({
   providedIn: 'root'
 })
-export class FamilyService {  
+export class FamilyService {
+
   
   private host = environment.apiUrl;
   private families: Family[] = [];
@@ -41,8 +42,14 @@ export class FamilyService {
   }
 
   public addPlantToFamiliesSubject(plant: Plant) {
-    let family = this.families.find(family => family.id == plant.family.id).plants.push(plant);
+    this.families.find(family => family.id == plant.family.id).plants.push(plant);
     this.familiesSubject.next(this.families);
-  }
+  }  
+  
+  removePlantFromFamily(plantId: number, familyId: number) {
+    let plants = this.families.find(family => family.id == familyId).plants.filter(plant => plant.id !== plantId);
+    this.families.find(family => family.id == familyId).plants = plants;
+    this.familiesSubject.next(this.families);
+  }  
 
 }

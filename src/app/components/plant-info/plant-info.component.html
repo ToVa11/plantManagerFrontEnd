@@ -5,21 +5,6 @@
               <img [src]="plant.headerImageUrl" class="img-fluid" alt="...">
           </div>
           <div class="widget-body">
-              <div class="quick-actions hover" [hidden]="!isUserLoggedIn()">
-                  <div class="dropdown">
-                      <button type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle">
-                          <i class="la la-ellipsis-h"></i>
-                      </button>
-                      <div class="dropdown-menu">
-                          <a href="#" class="dropdown-item remove">
-                              <i class="la la-trash"></i>Delete
-                          </a>
-                          <a href="#" class="dropdown-item">
-                              <i class="la la-edit"></i>Edit
-                          </a>
-                      </div>
-                  </div>
-              </div>
               <div class="cover-image mx-auto">
                   <img [src]="plant.profileImageUrl" alt="..." class="rounded-circle mx-auto">
               </div>
@@ -29,6 +14,19 @@
               <div class="text-center pt-5 pb-3" [hidden]="!isUserLoggedIn()">
                   <a href="#" class="btn btn-shadow">WishList</a>
                   <a href="#" class="btn btn-shadow">OwnList</a>
+              </div>
+              <div class="text-center pt-5 pb-3" [hidden]="!isUserLoggedIn()">
+                <button class="btn btn-sm btn-secondary"  
+                mwlConfirmationPopover 
+                [popoverTitle] = "popoverTitle"
+                [popoverMessage] = "popoverMessage"
+                (confirm)="deletePlant(plant.id)"
+                (cancel)="cancelClicked=true"
+                placement = "left" 
+                ><i class="far fa-trash-alt"></i>Delete</button>
+                  <a href="#" class="dropdown-item">
+                      <i class="la la-edit"></i>Edit
+                  </a>
               </div>
           </div>
       </div>

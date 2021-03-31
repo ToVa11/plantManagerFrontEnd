@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Family } from 'src/app/model/family';
 import { Plant } from 'src/app/model/plant';
 import { AuthenticationService } from 'src/app/service/authentication.service';
+import { FamilyService } from 'src/app/service/family.service';
 import { PlantService } from 'src/app/service/plant.service';
 
 @Component({
@@ -12,8 +14,16 @@ import { PlantService } from 'src/app/service/plant.service';
 export class PlantInfoComponent implements OnInit {
 
   @Input() plant: Plant;
+  @Input() family: Family;
+
+  public popoverTitle = 'Are you sure?';
+  public popoverMessage = 'Are you sure you want to delete this plant?';
+  public confirmText = 'Delete';
+  public cancelText = 'Cancel';
+  public confirmClicked=false;
+  public cancelClicked=false;
   
-  constructor(private authService: AuthenticationService) { }
+  constructor(private authService: AuthenticationService, private plantService: PlantService, private familyService: FamilyService) { }
 
   ngOnInit(): void {
   }
@@ -22,4 +32,11 @@ export class PlantInfoComponent implements OnInit {
     return this.authService.isUserLoggedIn();
   }
 
+  public deletePlant(plantId: number) {
+    this.plantService.deletePlant(plantId).subscribe(
+      () => {
+        this.familyService.removePlantFromFamily(plantId, this.family.id);
+      }
+    );
+  }
 }

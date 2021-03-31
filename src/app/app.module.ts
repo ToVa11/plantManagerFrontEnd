@@ -16,6 +16,7 @@ import { AddPlantFamilyComponent } from './components/add-plant-family/add-plant
 import { FamilyService } from './service/family.service';
 import { AddPlantComponent } from './components/add-plant/add-plant.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 @NgModule({
@@ -34,7 +35,10 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
     FormsModule,
     HttpClientModule,
     Ng2ImgMaxModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType:'danger'
+    })
   ],
   providers: [
     FamilyService,
