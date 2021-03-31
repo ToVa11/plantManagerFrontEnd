@@ -14,17 +14,26 @@ export class PlantService {
 
   constructor(private http: HttpClient) { }
 
-  public addPlant(formData:FormData): Observable<Plant> {
+  
+  public getPlant(plantId: number): Observable<Plant> {
+    return this.http.get<Plant>(`${this.host}/plant/${plantId}`)
+  }
+
+  public addPlant(formData: FormData): Observable<Plant> {
     return this.http.post<Plant>(`${this.host}/plant/add`, formData);
   }
 
   public createNewPlantFormData(family: Family, plantForm: NgForm, plantHeaderImage: File, plantProfileImage: File) {
-    const plant = new Plant(0, plantForm.value.name,plantForm.value.amountOfWater, plantForm.value.amountOfLight,plantForm.value.needsSpraying,plantForm.value.remarks,family);
+    const plant = new Plant(0, plantForm.value.name, plantForm.value.amountOfWater, plantForm.value.amountOfLight, plantForm.value.needsSpraying, plantForm.value.remarks, family);
     const formData = new FormData();
     formData.append('plantHeaderImage', plantHeaderImage);
     formData.append('plantProfileImage', plantProfileImage);
-    formData.append('plant',JSON.stringify(plant));
-    
+    formData.append('plant', JSON.stringify(plant));
+
     return formData;
+  }
+
+  public deletePlant(plant: Plant) {
+    return this.http.post(`${this.host}/plant/delete`, plant);
   }
 }

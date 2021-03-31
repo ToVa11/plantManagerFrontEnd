@@ -30,7 +30,7 @@ export class AddPlantFamilyComponent implements OnInit, OnDestroy {
     this.subscriptions.push(
       this.familyService.addFamily(familyForm.value).subscribe(
         (response) => {
-          document.getElementById('dismissModalBtn').click();
+          document.getElementById('dismissAddPlantModalBtn').click();
           familyForm.reset();
           this.familyService.addFamilyToFamiliesSubject(response);
         }
