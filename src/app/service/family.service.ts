@@ -23,7 +23,7 @@ export class FamilyService {
   }
 
   public getFamilyNames(): Observable<Family[]> {
-    return this.http.get<Family[]>(`${this.host}/family/listNames`);
+    return this.http.get<Family[]>(`${this.host}/family/list/names`);
   }
 
   public setFamilies(families: Family[]) {
