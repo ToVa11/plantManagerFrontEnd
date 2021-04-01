@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
 import { Family } from 'src/app/model/family';
 import { Plant } from 'src/app/model/plant';
 import { AuthenticationService } from 'src/app/service/authentication.service';

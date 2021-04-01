@@ -1,9 +1,15 @@
 <div class="container">
-  <h2>{{family?.name}}</h2>
- 
+  <h2>{{family?.name}} <span *ngIf="isUserLoggedIn()" class="float-right">
+      <button class="btn btn-sm btn-secondary" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage" (confirm)="deleteFamily(family.id)" (cancel)="cancelClicked=true"
+        placement="bottom"><i class="far fa-trash-alt mr-1"></i>Delete</button>
+      <button class="btn btn-sm btn-secondary ml-2">
+        <i class="fas fa-edit mr-1"></i>Edit
+      </button></span></h2>
+
 </div>
 <div class="container bootdey">
   <div class="row flex-row">
-  <app-plant-info *ngFor="let plant of family.plants" [plant]="plant" [family]="family"></app-plant-info>
-</div>
+    <app-plant-info *ngFor="let plant of family.plants" [plant]="plant" [family]="family"></app-plant-info>
+  </div>
 </div>

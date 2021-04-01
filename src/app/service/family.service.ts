@@ -11,7 +11,6 @@ import { Plant } from '../model/plant';
 })
 export class FamilyService {
 
-  
   private host = environment.apiUrl;
   private families: Family[] = [];
   private familiesSubject = new BehaviorSubject([]);
@@ -51,5 +50,18 @@ export class FamilyService {
     this.families.find(family => family.id == familyId).plants = plants;
     this.familiesSubject.next(this.families);
   }  
+
+  removeFamilyFromObservable() {
+
+  }
+  
+  public deleteFamily(familyId: number) {
+      return this.http.delete(`${this.host}/family/delete/${familyId}`);
+  }
+
+  public familyHasPlants(familyId: number): any {
+    const family = this.families.find(family => family.id == familyId);
+    return family.plants.length > 0;
+  }
 
 }

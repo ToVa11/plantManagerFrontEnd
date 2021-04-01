@@ -21,6 +21,7 @@
     "@angular/router": "~9.1.4",
     "@auth0/angular-jwt": "^5.0.2",
     "angular-confirmation-popover": "^6.0.0",
+    "angular2-toaster": "^11.0.1",
     "blueimp-canvas-to-blob": "^3.28.0",
     "ng2-img-max": "^2.2.4",
     "rxjs": "~6.5.4",

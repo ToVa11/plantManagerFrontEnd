@@ -33,5 +33,4 @@ export class FamilyPlantsListComponent implements OnInit, OnDestroy {
     );
   }
 
-
 }
