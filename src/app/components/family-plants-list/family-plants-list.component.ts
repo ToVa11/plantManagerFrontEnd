@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { Family } from 'src/app/model/family';
 import { FamilyService } from 'src/app/service/family.service';
@@ -14,14 +15,18 @@ export class FamilyPlantsListComponent implements OnInit, OnDestroy {
   public families: Family[] = [];
   private subscriptions: Subscription[] = [];
 
-  constructor(private familyService: FamilyService) { }
+  constructor(
+    private familyService: FamilyService,
+    private toastr: ToastrService) { }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub=>sub.unsubscribe());
   }
 
   ngOnInit(): void {
     this.familyService.getFamilies().subscribe(
-      (families) => { this.familyService.setFamilies(families) }
+      (families) => { this.familyService.setFamilies(families) },
+      (error) => { this.toastr.error(error.error.message, 'Error')}
     );
     this.getFamilies();
 

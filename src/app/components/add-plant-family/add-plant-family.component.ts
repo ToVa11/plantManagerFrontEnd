@@ -1,6 +1,7 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Family } from 'src/app/model/family';
 import { FamilyService } from 'src/app/service/family.service';
@@ -16,7 +17,12 @@ export class AddPlantFamilyComponent implements OnInit, OnDestroy {
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private familyService: FamilyService, private router: Router) { }
+  constructor(
+    private familyService: FamilyService, 
+    private router: Router,
+    private toastr: ToastrService
+    ) { }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
@@ -33,6 +39,10 @@ export class AddPlantFamilyComponent implements OnInit, OnDestroy {
           document.getElementById('dismissAddPlantModalBtn').click();
           familyForm.reset();
           this.familyService.addFamilyToFamiliesSubject(response);
+          this.toastr.success('Family added successfully.', 'Added');
+        },
+        (error) => {
+          this.toastr.error(error.error.message, 'Error');
         }
       )
     );

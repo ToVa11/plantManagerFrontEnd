@@ -5,6 +5,7 @@ import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
 import { HeaderType } from '../enum/headerType.enum';
 import { Subscription } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public userLoggedIn: boolean;
   private subscriptions: Subscription[] = [];
 
-  constructor(private authService: AuthenticationService, private router: Router) { }
+  constructor(
+    private authService: AuthenticationService, 
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub=>sub.unsubscribe());
@@ -38,9 +42,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
           this.showLoading = false;
           this.userLoggedIn = true;
           document.getElementById('dropdownLoginMenu').click();
+          this.toastr.success(`Welcome, ${response.body.username}`);
         },
         (error: HttpErrorResponse) => {
-          console.log(error.error.message);
+          this.toastr.error('Something went wrong.', 'Error');
           this.showLoading = false;
           this.authService.clearUserAndTokenFromLocalStorage();
           this.userLoggedIn = false;

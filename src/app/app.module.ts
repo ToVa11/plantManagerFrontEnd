@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +18,7 @@ import { FamilyService } from './service/family.service';
 import { AddPlantComponent } from './components/add-plant/add-plant.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -38,7 +40,9 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ReactiveFormsModule,
     ConfirmationPopoverModule.forRoot({
       confirmButtonType:'danger'
-    })
+    }),
+    BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     FamilyService,

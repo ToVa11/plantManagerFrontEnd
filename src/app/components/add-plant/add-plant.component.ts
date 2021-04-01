@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, NgForm, Validators } from '@angular/forms';
 import { Ng2ImgMaxService } from 'ng2-img-max';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Family } from 'src/app/model/family';
 import { FamilyService } from 'src/app/service/family.service';
@@ -25,7 +26,8 @@ export class AddPlantComponent implements OnInit, OnDestroy {
     private familyService: FamilyService,
     private plantService: PlantService,
     private imageService: Ng2ImgMaxService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private toastr: ToastrService
   ) { }
 
   ngOnDestroy(): void {
@@ -64,8 +66,9 @@ export class AddPlantComponent implements OnInit, OnDestroy {
         (response) => {
           this.familyService.addPlantToFamiliesSubject(response);
           document.getElementById('dismissModalPlantBtn').click();
+          this.toastr.success('Family added successfully.', 'Added');
         },
-        (error) => console.log(error.error.message)
+        (error) => this.toastr.error(error.error.message,'Error')
       )
     );
   }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Family } from 'src/app/model/family';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { FamilyService } from 'src/app/service/family.service';
@@ -19,7 +20,7 @@ export class FamilyHeaderComponent implements OnInit {
   public confirmClicked=false;
   public cancelClicked=false;
 
-  constructor(private familyService: FamilyService, private authService: AuthenticationService) { }
+  constructor(private familyService: FamilyService, private authService: AuthenticationService, private toastr:ToastrService) { }
 
   ngOnInit(): void {
   }
@@ -28,12 +29,12 @@ export class FamilyHeaderComponent implements OnInit {
     if(!this.familyService.familyHasPlants(familyId)) {
       this.familyService.deleteFamily(familyId).subscribe(
         () => {
-          console.log('deleted');
+          this.toastr.success('Family deleted', 'Deleted');
         }
       );
     }
     else {
-      console.log(this.familyService.familyHasPlants(familyId));
+      this.toastr.warning('Family still has plants and cannot be deleted.', 'Warning');
     }
   }
 
