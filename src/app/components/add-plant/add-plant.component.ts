@@ -66,7 +66,7 @@ export class AddPlantComponent implements OnInit, OnDestroy {
         (response) => {
           this.familyService.addPlantToFamiliesSubject(response);
           document.getElementById('dismissModalPlantBtn').click();
-          this.toastr.success('Family added successfully.', 'Added');
+          this.toastr.success('Plant added successfully.', 'Added');
         },
         (error) => this.toastr.error(error.error.message,'Error')
       )
