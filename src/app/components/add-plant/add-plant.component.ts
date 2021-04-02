@@ -102,10 +102,9 @@ export class AddPlantComponent implements OnInit, OnDestroy {
 
   public onProfileImageChange(file: File): void {
     this.plantProfileImage = file;
-    this.imageResizing = true;
-
 
     if (file.size > 1000000) {
+      this.imageResizing = true;
       this.subscriptions.push(
         this.imageService.compressImage(file, 1).subscribe(
           result => {
