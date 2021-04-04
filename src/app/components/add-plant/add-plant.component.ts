@@ -34,8 +34,6 @@ export class AddPlantComponent implements OnInit, OnDestroy {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
-
-
   ngOnInit(): void {
     this.plantForm = this.fb.group({
       familyId: [0, [Validators.min(0), Validators.required]],
@@ -49,14 +47,15 @@ export class AddPlantComponent implements OnInit, OnDestroy {
       profileImage: [, Validators.required]
     });
 
-    this.subscriptions.push(
-      this.familyService.getFamilyNames().subscribe(
-        (response) => { this.families = response }
-      )
-    );
-
+    this.getFamilies();
   }
 
+  public getFamilies() {
+    this.subscriptions.push(
+      this.familyService.families$.subscribe(families => this.families = families)
+    );
+  }
+  
   public onAddPlant() {
     const family = this.families.find(family => family.id === parseInt(this.plantForm.value.familyId));
     const formData = this.plantService.createNewPlantFormData(family, this.plantForm, this.plantHeaderImage, this.plantProfileImage);
