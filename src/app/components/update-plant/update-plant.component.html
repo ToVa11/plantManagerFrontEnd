@@ -1,1 +1,52 @@
-<p>update-plant works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">Hi there!</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form class="form" role="form">
+  <div class="modal-body">
+    <label for="family">Family</label>
+    <select type="text" name="family" class="form-control" formControlName="familyId">
+      <option *ngIf="families.length != 0" value="0">--Families--</option>
+      <option *ngIf="families.length == 0" value="0">Could not load families</option>
+      <option *ngFor="let family of families" [value]="family.id">{{family.name}}</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name" placeholder="Name" name="name" formControlName="name" required>
+  </div>
+  <div class="form-group">
+    <label for="amountOfLight">amount Of Light</label>
+    <input type="text" class="form-control" id="amountOfLight" placeholder="amount Of Light" name="amountOfLight" formControlName="amountOfLight">
+  </div>
+  <div class="form-group">
+    <label for="amountOfWater">amount Of Water</label>
+    <input type="text" class="form-control" id="amountOfWater" placeholder="amount Of Water" name="amountOfWater" formControlName="amountOfWater">
+  </div><div class="form-check">
+    <input class="form-check-input" type="checkbox" value="" id="needsSpraying" name="needsSpraying" formControlName="needsSpraying">
+    <label class="form-check-label" for="needsSpraying">
+      Needs spraying
+    </label>
+  </div>
+  <div class="form-group">
+    <label for="remarks">Remarks</label>
+    <textarea class="form-control" id="remarks" rows="3" name="remarks"formControlName="remarks"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="headerImage">Header image</label>
+    <input type="file" class="form-control-file" (change)="onHeaderImageChange($event.target.files[0])"
+    id="headerImage" name="headerImage" formControlName="headerImage">
+  </div>
+  <div class="form-group">
+    <label for="profileImage">Profile image</label>
+    <input type="file" class="form-control-file" (change)="onProfileImageChange($event.target.files[0])"
+    id="profileImage" name="profileImage" formControlName="profileImage">
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Save changes</button>
+    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="dismissupdatePlantModalBtn"
+      (click)="activeModal.dismiss('Cross click')">Close</button>
+  </div>
+</form>

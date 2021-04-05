@@ -48,8 +48,7 @@ import { UpdatePlantComponent } from './components/update-plant/update-plant.com
       confirmButtonType:'danger'
     }),
     BrowserAnimationsModule,
-    ToastrModule.forRoot(),
-    
+    ToastrModule.forRoot()  
   ],
   providers: [
     FamilyService,

@@ -24,9 +24,9 @@
                 (cancel)="cancelClicked=true"
                 placement = "bottom" 
                 ><i class="far fa-trash-alt"></i>Delete</button>
-                  <a href="#" class="dropdown-item">
-                      <i class="la la-edit"></i>Edit
-                  </a>
+                  <button class="btn btn-sm btn-secondary" (click)="openEditPlantModal(plant.id)">
+                      <i class="fas fa-edit"></i>Edit
+                  </button>
               </div>
           </div>
       </div>
