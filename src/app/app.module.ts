@@ -21,6 +21,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToastrModule } from 'ngx-toastr';
 import { UpdateFamilyComponent } from './components/update-family/update-family.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { UpdatePlantComponent } from './components/update-plant/update-plant.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     PlantInfoComponent,
     AddPlantFamilyComponent,
     AddPlantComponent,
-    UpdateFamilyComponent
+    UpdateFamilyComponent,
+    UpdatePlantComponent
   ],
   imports: [
     NgbModule,
