@@ -16,37 +16,25 @@ import { PlantService } from 'src/app/service/plant.service';
 })
 export class UpdatePlantComponent implements OnInit, OnDestroy {
 
+  @Input() plant: Plant;
+
   public plantForm: any;
   public families: Family[] = [];
   public imageResizing = false;
-  private plantHeaderImage: File;
-  private plantProfileImage: File;
+  private plantHeaderImage: File = null;
+  private plantProfileImage: File = null;
   private subscriptions: Subscription[] = [];
-
-  @Input() plant: Plant;
-
 
   constructor(
     public activeModal: NgbActiveModal,
     private plantService: PlantService, 
     private familyService: FamilyService,
     private toastr: ToastrService,    
-    private imageService: Ng2ImgMaxService,
-    private fb: FormBuilder,) { }
+    private imageService: Ng2ImgMaxService) { }
 
   ngOnInit(): void {
-    this.plantForm = this.fb.group({
-      familyId: [this.plant.family.id, [Validators.min(0), Validators.required]],
-      family: [],
-      name: [this.plant.name, Validators.required],
-      amountOfLight: [this.plant.amountOfLight],
-      amountOfWater: [this.plant.amountOfWater],
-      needsSpraying: [this.plant.needsSpraying],
-      remarks: [this.plant.remarks],
-      headerImage: [],
-      profileImage: []
-    });
-
+    console.log('init: ');
+    console.log(this.plant);
     this.getFamilies();
   }
 
@@ -61,15 +49,15 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
   }
   
   public onUpdatePlant() {
-    const family = this.families.find(family => family.id === parseInt(this.plantForm.value.familyId));
-    const formData = this.plantService.createNewPlantFormData(family, this.plantForm, this.plantHeaderImage, this.plantProfileImage);
+    const family = this.families.find(family => family.id === this.plant.family.id);
+    const formData = this.plantService.createUpdatePlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
 
     this.subscriptions.push(
-      this.plantService.addPlant(formData).subscribe(
+      this.plantService.updatePlant(formData).subscribe(
         (response) => {
-          this.familyService.addPlantToFamiliesSubject(response);
-          document.getElementById('dismissModalPlantBtn').click();
-          this.toastr.success('Plant added successfully.', 'Added');
+          this.familyService.updatePlantToFamiliesSubject(response);
+          this.activeModal.close();
+          this.toastr.success('Plant updated successfully.', 'Added');
         },
         (error) => this.toastr.error(error.error.message,'Error')
       )

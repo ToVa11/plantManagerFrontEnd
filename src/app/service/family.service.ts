@@ -57,6 +57,12 @@ export class FamilyService {
     this.families.find(family => family.id == plant.family.id).plants.push(plant);
     this.familiesSubject.next(this.families);
   }  
+
+  updatePlantToFamiliesSubject(plant: Plant) {
+    this.removePlantFromFamily(plant.id, plant.family.id);
+    this.addPlantToFamiliesSubject(plant);
+  }
+
   
   removePlantFromFamily(plantId: number, familyId: number) {
     let plants = this.families.find(family => family.id == familyId).plants.filter(plant => plant.id !== plantId);

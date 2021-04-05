@@ -10,6 +10,7 @@ import { Plant } from '../model/plant';
   providedIn: 'root'
 })
 export class PlantService {
+
   private host = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
@@ -23,6 +24,10 @@ export class PlantService {
     return this.http.post<Plant>(`${this.host}/plant/add`, formData);
   }
 
+  updatePlant(formData: FormData) {
+    return this.http.put<Plant>(`${this.host}/plant/update`, formData);
+  }
+
   public createNewPlantFormData(family: Family, plantForm: NgForm, plantHeaderImage: File, plantProfileImage: File) {
     const plant = new Plant(0, plantForm.value.name, plantForm.value.amountOfWater, plantForm.value.amountOfLight, plantForm.value.needsSpraying, plantForm.value.remarks, family);
     const formData = new FormData();
@@ -32,6 +37,18 @@ export class PlantService {
 
     return formData;
   }
+
+  createUpdatePlantFormData(family: Family, plant: Plant, plantHeaderImage?: File, plantProfileImage?: File) {
+    const formData = new FormData();
+    if(plantHeaderImage !== null) {
+      formData.append('plantHeaderImage', plantHeaderImage);
+    }
+    if(plantProfileImage !== null) {
+      formData.append('plantProfileImage', plantProfileImage);
+    }
+    formData.append('plant', JSON.stringify(plant));
+
+    return formData;  }
 
   public deletePlant(id: number) {    
     return this.http.delete(`${this.host}/plant/delete/${id}`);

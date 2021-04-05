@@ -47,8 +47,12 @@ export class PlantInfoComponent implements OnInit {
   }
 
   public openEditPlantModal(plantId: number) {
-    const plant = this.plantService.getPlant(plantId);
-    const modalRef = this.modalService.open(UpdatePlantComponent);
-    modalRef.componentInstance.plant = plant;
+    this.plantService.getPlant(plantId).subscribe(
+      (plant) => {
+        const modalRef = this.modalService.open(UpdatePlantComponent);
+        modalRef.componentInstance.plant = plant;
+      }
+    );
+    
   }
 }
