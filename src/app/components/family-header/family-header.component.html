@@ -3,7 +3,7 @@
       <button class="btn btn-sm btn-secondary" mwlConfirmationPopover [popoverTitle]="popoverTitle"
         [popoverMessage]="popoverMessage" (confirm)="deleteFamily(family.id)" (cancel)="cancelClicked=true"
         placement="bottom"><i class="far fa-trash-alt mr-1"></i>Delete</button>
-      <button class="btn btn-sm btn-secondary ml-2">
+      <button class="btn btn-sm btn-secondary ml-2" (click)="openFamilyModal(family.id)">
         <i class="fas fa-edit mr-1"></i>Edit
       </button></span></h2>
 

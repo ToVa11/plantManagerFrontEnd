@@ -1,11 +1,8 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
-import { Family } from 'src/app/model/family';
 import { FamilyService } from 'src/app/service/family.service';
-import { FamilyPlantsListComponent } from '../family-plants-list/family-plants-list.component';
 
 @Component({
   selector: 'app-add-plant-family',
@@ -19,7 +16,6 @@ export class AddPlantFamilyComponent implements OnInit, OnDestroy {
 
   constructor(
     private familyService: FamilyService, 
-    private router: Router,
     private toastr: ToastrService
     ) { }
 

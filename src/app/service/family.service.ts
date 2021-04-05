@@ -12,9 +12,14 @@ import { Plant } from '../model/plant';
 export class FamilyService {
 
   private host = environment.apiUrl;
+  
   private families: Family[] = [];
   private familiesSubject = new BehaviorSubject([]);
   public families$ = this.familiesSubject.asObservable();
+
+  private family: Family = new Family(0,'',[]);
+  private familySubject = new BehaviorSubject<Family>(this.family);
+  public family$ = this.familySubject.asObservable();
 
   constructor(private http: HttpClient) { }
 
@@ -31,8 +36,16 @@ export class FamilyService {
     this.familiesSubject.next(families);
   }
 
+  public getFamily(familyId:number) {
+    return this.families.find(family => family.id == familyId);
+  }
+
   public addFamily(family: Family): Observable<Family> {
     return this.http.post<Family>(`${this.host}/family/add`,family);
+  }
+
+  public updateFamily(family: Family): Observable<Family> {
+    return this.http.put<Family>(`${this.host}/family/update`, family);
   }
 
   public addFamilyToFamiliesSubject(family: Family) {

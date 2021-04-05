@@ -19,6 +19,8 @@ import { AddPlantComponent } from './components/add-plant/add-plant.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToastrModule } from 'ngx-toastr';
+import { UpdateFamilyComponent } from './components/update-family/update-family.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 @NgModule({
@@ -29,9 +31,11 @@ import { ToastrModule } from 'ngx-toastr';
     FamilyPlantsListComponent,
     PlantInfoComponent,
     AddPlantFamilyComponent,
-    AddPlantComponent
+    AddPlantComponent,
+    UpdateFamilyComponent
   ],
   imports: [
+    NgbModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -42,7 +46,8 @@ import { ToastrModule } from 'ngx-toastr';
       confirmButtonType:'danger'
     }),
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    
   ],
   providers: [
     FamilyService,

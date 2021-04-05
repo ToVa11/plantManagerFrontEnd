@@ -1,8 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { Family } from 'src/app/model/family';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { FamilyService } from 'src/app/service/family.service';
+import { UpdateFamilyComponent } from '../update-family/update-family.component';
 
 @Component({
   selector: 'app-family-header',
@@ -20,7 +22,13 @@ export class FamilyHeaderComponent implements OnInit {
   public confirmClicked=false;
   public cancelClicked=false;
 
-  constructor(private familyService: FamilyService, private authService: AuthenticationService, private toastr:ToastrService) { }
+
+  constructor(
+    private familyService: FamilyService, 
+    private authService: AuthenticationService, 
+    private toastr:ToastrService,
+    private modalService: NgbModal
+    ) { }
 
   ngOnInit(): void {
   }
@@ -40,5 +48,11 @@ export class FamilyHeaderComponent implements OnInit {
 
   public isUserLoggedIn() {
     return this.authService.isUserLoggedIn();
+  }
+
+  openFamilyModal(familyId: number) {  
+    const familyModal = this.modalService.open(UpdateFamilyComponent);
+    const family = this.familyService.getFamily(familyId);
+    familyModal.componentInstance.family = family;
   }
 }
