@@ -21,14 +21,22 @@
         required>
     </div>
     <div class="form-group">
-      <label for="amountOfLight">amount Of Light</label>
-      <input type="text" class="form-control" id="amountOfLight" placeholder="amount Of Light" name="amountOfLight"
-        [(ngModel)]="plant.amountOfLight">
+      <p>Amount of light</p>
+      <label for="amountOfLightSun" class="mr-2"><i class="fas fa-sun"></i></label>
+      <input type="radio" name="amountOfLight" id="amountOfLightZ" [(ngModel)]="plant.amountOfLight" value="Z">
+      <label for="amountOfLightSun" class="ml-5 mr-2"><i class="fas fa-cloud-sun"></i></label>
+      <input type="radio" name="amountOfLight" id="amountOfLightGDZ" [(ngModel)]="plant.amountOfLight" value="GDZ">
+      <label for="amountOfLightSun" class="ml-5 mr-2"><i class="fas fa-umbrella"></i></label>
+      <input type="radio" name="amountOfLight" id="amountOfLightS" [(ngModel)]="plant.amountOfLight" value="S">
     </div>
     <div class="form-group">
-      <label for="amountOfWater">amount Of Water</label>
-      <input type="text" class="form-control" id="amountOfWater" placeholder="amount Of Water" name="amountOfWater"
-        [(ngModel)]="plant.amountOfWater">
+      <p>Amount of water</p>
+      <label for="amountOfWaterO" class="mr-2"><i class="fas fa-tint"></i></label>
+      <input type="radio" name="amountOfWater" id="amountOfWaterO" [(ngModel)]="plant.amountOfWater" value="O" >
+      <label for="amountOfLightSun" class="ml-5 mr-2"><i class="fas fa-tint"></i><i class="fas fa-tint"></i></label>
+      <input type="radio" name="amountOfWater" id="amountOfWaterOO" [(ngModel)]="plant.amountOfWater" value="OO">
+      <label for="amountOfLightSun" class="ml-5 mr-2"><i class="fas fa-tint"></i><i class="fas fa-tint"></i><i class="fas fa-tint"></i></label>
+      <input type="radio" name="amountOfWater" id="amountOfWaterOOO" [(ngModel)]="plant.amountOfWater" value="OOO">
     </div>
     <div class="form-check">
       <input class="form-check-input" type="checkbox" value="" id="needsSpraying" name="needsSpraying"
