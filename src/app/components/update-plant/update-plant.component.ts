@@ -33,8 +33,6 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
     private imageService: Ng2ImgMaxService) { }
 
   ngOnInit(): void {
-    console.log('init: ');
-    console.log(this.plant);
     this.getFamilies();
   }
 
