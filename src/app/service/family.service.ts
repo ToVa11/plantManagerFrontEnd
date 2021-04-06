@@ -55,22 +55,26 @@ export class FamilyService {
 
   public addPlantToFamiliesSubject(plant: Plant) {
     this.families.find(family => family.id == plant.family.id).plants.push(plant);
+    this.families.find(family => family.id == plant.family.id).plants.sort((a,b) => a.name.localeCompare(b.name));
     this.familiesSubject.next(this.families);
   }  
 
-  updatePlantToFamiliesSubject(plant: Plant) {
-    this.removePlantFromFamily(plant.id, plant.family.id);
+  updatePlantToFamiliesSubject(plant: Plant, originalFamilyId: number) {
+    this.removePlantFromFamily(plant.id, originalFamilyId);
     this.addPlantToFamiliesSubject(plant);
   }
 
   
-  removePlantFromFamily(plantId: number, familyId: number) {
-    let plants = this.families.find(family => family.id == familyId).plants.filter(plant => plant.id !== plantId);
-    this.families.find(family => family.id == familyId).plants = plants;
+  removePlantFromFamily(plantId: number, originalFamilyId: number) {
+    const plants = this.families.find(family => family.id == originalFamilyId).plants.filter(plant => plant.id != plantId);
+    this.families.find(family => family.id == originalFamilyId).plants = plants;
     this.familiesSubject.next(this.families);
   }  
 
-  removeFamilyFromObservable() {
+  removeFamilyFromObservable(familyId: number) {
+    const families = this.families.filter(family => family.id != familyId);
+    this.families = families;
+    this.familiesSubject.next(this.families);
 
   }
   

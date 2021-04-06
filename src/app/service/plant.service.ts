@@ -38,8 +38,9 @@ export class PlantService {
   //   return formData;
   // }
 
-  createPlantFormData(family: Family, plant: Plant, plantHeaderImage?: File, plantProfileImage?: File) {
-    const formData = new FormData();
+  createPlantFormData(plant: Plant, plantHeaderImage?: File, plantProfileImage?: File) {
+    const formData = new FormData();    
+
     if(plantHeaderImage !== null) {
       formData.append('plantHeaderImage', plantHeaderImage);
     }
@@ -48,7 +49,8 @@ export class PlantService {
     }
     formData.append('plant', JSON.stringify(plant));
 
-    return formData;  }
+    return formData;  
+  }
 
   public deletePlant(id: number) {    
     return this.http.delete(`${this.host}/plant/delete/${id}`);

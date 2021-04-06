@@ -51,6 +51,7 @@ export class PlantInfoComponent implements OnInit {
       (plant) => {
         const modalRef = this.modalService.open(UpdatePlantComponent);
         modalRef.componentInstance.plant = plant;
+        modalRef.componentInstance.family = plant.family;
       }
     );
     

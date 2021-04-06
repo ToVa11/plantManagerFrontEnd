@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public openPlantModal() {
     const modalRef = this.modalService.open(UpdatePlantComponent);
     modalRef.componentInstance.plant = new Plant(0,'','','',false,null, new Family(0,'',[]));
+    modalRef.componentInstance.family = new Family(0,'',[]);
   }
 
 }

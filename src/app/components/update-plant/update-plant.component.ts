@@ -17,6 +17,7 @@ import { PlantService } from 'src/app/service/plant.service';
 export class UpdatePlantComponent implements OnInit, OnDestroy {
 
   @Input() plant: Plant;
+  @Input() family: Family;
 
   public plantForm: any;
   public families: Family[] = [];
@@ -27,6 +28,7 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
   private plantHeaderImage: File = null;
   private plantProfileImage: File = null;
   private subscriptions: Subscription[] = [];
+  private originalFamilyId: number;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -41,6 +43,8 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
       this.filesRequired = true;
       this.modalTitle = `Update ${this.plant.name}`;
     }
+
+    this.originalFamilyId = this.family.id;
   }
 
   ngOnDestroy(): void {
@@ -54,13 +58,12 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
   }
   
   public updatePlant() {
-    const family = this.families.find(family => family.id === this.plant.family.id);
-    const formData = this.plantService.createPlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
+    const formData = this.plantService.createPlantFormData(this.plant, this.plantHeaderImage, this.plantProfileImage);
 
     this.subscriptions.push(
       this.plantService.updatePlant(formData).subscribe(
         (response) => {
-          this.familyService.updatePlantToFamiliesSubject(response);
+          this.familyService.updatePlantToFamiliesSubject(response, this.originalFamilyId);
           this.activeModal.close();
           this.toastr.success('Plant updated successfully.', 'Updated');
         },
@@ -70,8 +73,7 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
   }
 
   public addPlant() {
-    const family = this.families.find(family => family.id === this.plant.family.id);
-    const formData = this.plantService.createPlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
+    const formData = this.plantService.createPlantFormData(this.plant, this.plantHeaderImage, this.plantProfileImage);
 
     this.subscriptions.push(
       this.plantService.addPlant(formData).subscribe(

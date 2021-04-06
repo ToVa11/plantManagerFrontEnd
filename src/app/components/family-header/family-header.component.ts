@@ -38,6 +38,7 @@ export class FamilyHeaderComponent implements OnInit {
       this.familyService.deleteFamily(familyId).subscribe(
         () => {
           this.toastr.success('Family deleted', 'Deleted');
+          this.familyService.removeFamilyFromObservable(familyId);
         }
       );
     }
