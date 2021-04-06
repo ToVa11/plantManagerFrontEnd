@@ -22,7 +22,7 @@
                         </li>                        
                         <li class="px-3 py-2">
                             <i class="far fa-plus-square"></i>&nbsp;
-                            <a href="#" class="text-dark" data-toggle="modal" data-target="#addPlantModal">Add a plant</a>
+                            <a href="#" class="text-dark" (click)="openPlantModal()">Add a plant</a>
                         </li>
                     </ul>
                 </li>
@@ -85,4 +85,3 @@
 </div>
 
 <app-add-plant-family *ngIf="userLoggedIn"></app-add-plant-family>
-<app-add-plant *ngIf="userLoggedIn"></app-add-plant>

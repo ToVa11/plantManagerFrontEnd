@@ -21,6 +21,9 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
   public plantForm: any;
   public families: Family[] = [];
   public imageResizing = false;
+  public filesRequired = false;
+  public modalTitle: string = "Add new plant";
+
   private plantHeaderImage: File = null;
   private plantProfileImage: File = null;
   private subscriptions: Subscription[] = [];
@@ -34,6 +37,10 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getFamilies();
+    if(this.plant.id != 0) {
+      this.filesRequired = true;
+      this.modalTitle = `Update ${this.plant.name}`;
+    }
   }
 
   ngOnDestroy(): void {
@@ -46,20 +53,45 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
     );
   }
   
-  public onUpdatePlant() {
+  public updatePlant() {
     const family = this.families.find(family => family.id === this.plant.family.id);
-    const formData = this.plantService.createUpdatePlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
+    const formData = this.plantService.createPlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
 
     this.subscriptions.push(
       this.plantService.updatePlant(formData).subscribe(
         (response) => {
           this.familyService.updatePlantToFamiliesSubject(response);
           this.activeModal.close();
-          this.toastr.success('Plant updated successfully.', 'Added');
+          this.toastr.success('Plant updated successfully.', 'Updated');
         },
         (error) => this.toastr.error(error.error.message,'Error')
       )
     );
+  }
+
+  public addPlant() {
+    const family = this.families.find(family => family.id === this.plant.family.id);
+    const formData = this.plantService.createPlantFormData(family, this.plant, this.plantHeaderImage, this.plantProfileImage);
+
+    this.subscriptions.push(
+      this.plantService.addPlant(formData).subscribe(
+        (response) => {
+          this.familyService.addPlantToFamiliesSubject(response);
+          this.activeModal.close();
+          this.toastr.success('Plant added successfully.', 'Added');
+        },
+        (error) => this.toastr.error(error.error.message,'Error')
+      )
+    );
+  }
+
+  public onSubmitPlant() {
+    if(this.plant.id == 0) {
+      this.addPlant();
+    }
+    else {
+      this.updatePlant();
+    }
   }
 
   public onHeaderImageChange(file: File): void {
@@ -80,6 +112,7 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
             this.plantHeaderImage = result;
           }
           this.imageResizing = false;
+          this.checkFilesPresent();
         },
         error => {
           console.log('😢 Oh no!', error);
@@ -100,13 +133,23 @@ export class UpdatePlantComponent implements OnInit, OnDestroy {
             this.plantProfileImage = null;
             this.plantProfileImage = result;
             this.imageResizing = false;
+            this.checkFilesPresent();
           },
           error => {
             console.log(error);
+            this.checkFilesPresent();
             this.imageResizing = false;
           }
         )
       );
+    } else {
+      this.checkFilesPresent();
+    }
+  }
+
+  private checkFilesPresent() {
+    if(this.plantHeaderImage != null && this.plantProfileImage != null) {
+      this.filesRequired = true;
     }
   }
 

@@ -15,7 +15,6 @@ import { PlantInfoComponent } from './components/plant-info/plant-info.component
 import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AddPlantFamilyComponent } from './components/add-plant-family/add-plant-family.component';
 import { FamilyService } from './service/family.service';
-import { AddPlantComponent } from './components/add-plant/add-plant.component';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ToastrModule } from 'ngx-toastr';
@@ -32,7 +31,6 @@ import { UpdatePlantComponent } from './components/update-plant/update-plant.com
     FamilyPlantsListComponent,
     PlantInfoComponent,
     AddPlantFamilyComponent,
-    AddPlantComponent,
     UpdateFamilyComponent,
     UpdatePlantComponent
   ],

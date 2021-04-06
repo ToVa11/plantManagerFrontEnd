@@ -28,17 +28,17 @@ export class PlantService {
     return this.http.put<Plant>(`${this.host}/plant/update`, formData);
   }
 
-  public createNewPlantFormData(family: Family, plantForm: NgForm, plantHeaderImage: File, plantProfileImage: File) {
-    const plant = new Plant(0, plantForm.value.name, plantForm.value.amountOfWater, plantForm.value.amountOfLight, plantForm.value.needsSpraying, plantForm.value.remarks, family);
-    const formData = new FormData();
-    formData.append('plantHeaderImage', plantHeaderImage);
-    formData.append('plantProfileImage', plantProfileImage);
-    formData.append('plant', JSON.stringify(plant));
+  // public createNewPlantFormData(family: Family, plant: Plant, plantHeaderImage: File, plantProfileImage: File) {
+  //   const plant = new Plant(0, plantForm.value.name, plantForm.value.amountOfWater, plantForm.value.amountOfLight, plantForm.value.needsSpraying, plantForm.value.remarks, family);
+  //   const formData = new FormData();
+  //   formData.append('plantHeaderImage', plantHeaderImage);
+  //   formData.append('plantProfileImage', plantProfileImage);
+  //   formData.append('plant', JSON.stringify(plant));
 
-    return formData;
-  }
+  //   return formData;
+  // }
 
-  createUpdatePlantFormData(family: Family, plant: Plant, plantHeaderImage?: File, plantProfileImage?: File) {
+  createPlantFormData(family: Family, plant: Plant, plantHeaderImage?: File, plantProfileImage?: File) {
     const formData = new FormData();
     if(plantHeaderImage !== null) {
       formData.append('plantHeaderImage', plantHeaderImage);

@@ -1,11 +1,15 @@
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { User } from '../model/user';
 import { AuthenticationService } from '../service/authentication.service';
 import { HeaderType } from '../enum/headerType.enum';
 import { Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
+import { Plant } from '../model/plant';
+import { Family } from '../model/family';
+import { UpdatePlantComponent } from '../components/update-plant/update-plant.component';
 
 @Component({
   selector: 'app-navbar',
@@ -21,7 +25,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private authService: AuthenticationService, 
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private modalService: NgbModal) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub=>sub.unsubscribe());
@@ -59,4 +64,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.userLoggedIn = false;
   }
 
+
+  public openPlantModal() {
+    const modalRef = this.modalService.open(UpdatePlantComponent);
+    modalRef.componentInstance.plant = new Plant(0,'','','',false,null, new Family(0,'',[]));
+  }
+
 }
+
