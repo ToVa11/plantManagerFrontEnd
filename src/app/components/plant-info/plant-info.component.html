@@ -22,7 +22,14 @@
                             class="fas fa-tint"></i></span>
                 </div>
                 <div class="text-center pt-5 pb-3" [hidden]="!isUserLoggedIn()">
-                    <a href="#" class="btn btn-shadow">WishList</a>
+                    <a *ngIf="!onWishlist" href="#" class="btn btn-shadow" (click)="addPlantToWishlist(plant)">
+                        <span><i class="far fa-star"></i></span>
+                        WishList
+                    </a>
+                    <a *ngIf="onWishlist" href="#" class="btn btn-shadow" (click)="deletePlantFromWishlist(plant)">
+                        <span><i class="fas fa-star"></i></span>
+                        WishList
+                    </a>
                     <a href="#" class="btn btn-shadow">OwnList</a>
                 </div>
                 <div class="text-center pt-5 pb-3" [hidden]="!isUserLoggedIn()">

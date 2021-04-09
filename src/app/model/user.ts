@@ -5,6 +5,7 @@ export class User {
   public username: string;
   public email: string;
   public profileImageUrl: string;
+  public wishlist: [];
   public role: [];
   public authorities: [];
 
@@ -17,6 +18,7 @@ export class User {
     this.username='';
     this.email='';
     this.profileImageUrl='';
+    this.wishlist = [];
     this.role= [];
     this.authorities=[];
   }

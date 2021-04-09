@@ -5,6 +5,7 @@ import { Plant } from 'src/app/model/plant';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { FamilyService } from 'src/app/service/family.service';
 import { PlantService } from 'src/app/service/plant.service';
+import { WishlistService } from 'src/app/service/wishlist.service';
 import { UpdatePlantComponent } from '../update-plant/update-plant.component';
 
 @Component({
@@ -23,15 +24,35 @@ export class PlantInfoComponent implements OnInit {
   public cancelText = 'Cancel';
   public confirmClicked=false;
   public cancelClicked=false;
+  public onWishlist=false;
   
+  private wishlist: number[] = [];
+
   constructor(
     private authService: AuthenticationService, 
     private plantService: PlantService, 
     private familyService: FamilyService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    private wishlistService: WishlistService
     ) { }
 
   ngOnInit(): void {
+
+    this.wishlistService.wishlist$.subscribe(
+      (response) => {
+        this.wishlist = response;
+        this.onWishlist= this.checkPlant();
+      }
+    );
+
+    this.wishlistService.getWishlist().subscribe(
+      (response)=> {
+        this.wishlist = response.plantIds;
+        this.onWishlist= this.checkPlant();
+      }
+    );
+
+
   }
 
   public isUserLoggedIn(): boolean {
@@ -54,6 +75,32 @@ export class PlantInfoComponent implements OnInit {
         modalRef.componentInstance.family = plant.family;
       }
     );
-    
+  }
+
+  public addPlantToWishlist(plant: Plant) {
+    this.wishlistService.addPlantToWishlist(plant).subscribe(
+      (response) => {
+        this.wishlistService.updateWishlistObservable(response.plantIds);
+        this.onWishlist = true;
+      }
+    );
+  }
+
+  public deletePlantFromWishlist(plant: Plant) {
+    this.wishlistService.deletePlantFromWishlist(plant).subscribe(
+      (response) => {
+        this.wishlistService.updateWishlistObservable(response.plantIds)
+        this.onWishlist=false;
+      }
+    )
+  }
+
+  
+  private checkPlant(): boolean {
+    if(this.wishlist.length <= 0) {
+      return false;
+    }
+    let plantIds = this.wishlist.filter(plantId => plantId == this.plant.id);
+    return plantIds.length > 0;
   }
 }
