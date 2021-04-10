@@ -8,7 +8,7 @@
                 <div class="cover-image mx-auto">
                     <img [src]="plant.profileImageUrl" alt="..." class="rounded-circle mx-auto">
                 </div>
-                <h4 class="name"><a href="#">{{plant.name}}</a></h4>
+                <h4 class="name"><a href="#" (click)="openEditPlantModal(plant.id)">{{plant.name}}</a></h4>
                 <div class="job">
                     <span *ngIf="plant.amountOfLight=='Z'"><i class="fas fa-sun"></i></span>
                     <span *ngIf="plant.amountOfLight=='GDZ'"><i class="fas fa-cloud-sun"></i></span>
@@ -30,8 +30,14 @@
                         <span><i class="fas fa-star"></i></span>
                         WishList
                     </a>
-                    <a href="#" class="btn btn-shadow">OwnList</a>
-                </div>
+                    <a *ngIf="!onOwnlist" href="#" class="btn btn-shadow" (click)="addPlantToOwnlist(plant)">
+                        <span><i class="far fa-star"></i></span>
+                        Owned
+                    </a>
+                    <a *ngIf="onOwnlist" href="#" class="btn btn-shadow" (click)="deletePlantFromOwnlist(plant)">
+                        <span><i class="fas fa-star"></i></span>
+                        Owned
+                    </a>                </div>
                 <div class="text-center pt-5 pb-3" [hidden]="!isUserLoggedIn()">
                     <button class="btn btn-sm btn-secondary" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                         [popoverMessage]="popoverMessage" (confirm)="deletePlant(plant.id)"

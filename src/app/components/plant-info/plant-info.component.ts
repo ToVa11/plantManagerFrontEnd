@@ -4,6 +4,7 @@ import { Family } from 'src/app/model/family';
 import { Plant } from 'src/app/model/plant';
 import { AuthenticationService } from 'src/app/service/authentication.service';
 import { FamilyService } from 'src/app/service/family.service';
+import { OwnlistService } from 'src/app/service/ownlist.service';
 import { PlantService } from 'src/app/service/plant.service';
 import { WishlistService } from 'src/app/service/wishlist.service';
 import { UpdatePlantComponent } from '../update-plant/update-plant.component';
@@ -25,15 +26,18 @@ export class PlantInfoComponent implements OnInit {
   public confirmClicked=false;
   public cancelClicked=false;
   public onWishlist=false;
+  public onOwnlist=false;
   
   private wishlist: number[] = [];
+  private ownlist: number[] = [];
 
   constructor(
     private authService: AuthenticationService, 
     private plantService: PlantService, 
     private familyService: FamilyService,
     public modalService: NgbModal,
-    private wishlistService: WishlistService
+    private wishlistService: WishlistService,
+    private ownlistService: OwnlistService
     ) { }
 
   ngOnInit(): void {
@@ -41,14 +45,28 @@ export class PlantInfoComponent implements OnInit {
     this.wishlistService.wishlist$.subscribe(
       (response) => {
         this.wishlist = response;
-        this.onWishlist= this.checkPlant();
+        this.onWishlist= this.checkPlantWishlist();
       }
     );
 
     this.wishlistService.getWishlist().subscribe(
       (response)=> {
         this.wishlist = response.plantIds;
-        this.onWishlist= this.checkPlant();
+        this.onWishlist= this.checkPlantWishlist();
+      }
+    );
+
+    this.ownlistService.ownlist$.subscribe(
+      (response) => {
+        this.ownlist = response;
+        this.onOwnlist = this.checkPlantOwnlist();
+      }
+    );
+
+    this.ownlistService.getOwnlist().subscribe(
+      (response)=> {
+        this.ownlist = response.plantIds;
+        this.onOwnlist= this.checkPlantOwnlist();
       }
     );
 
@@ -94,13 +112,37 @@ export class PlantInfoComponent implements OnInit {
       }
     )
   }
+  public addPlantToOwnlist(plant: Plant) {
+    this.ownlistService.addPlantToOwnlist(plant).subscribe(
+      (response) => {
+        this.ownlistService.updateOwnlistObservable(response.plantIds);
+        this.onOwnlist = true;
+      }
+    );
+  }
 
-  
-  private checkPlant(): boolean {
+  public deletePlantFromOwnlist(plant: Plant) {
+    this.ownlistService.deletePlantFromOwnlist(plant).subscribe(
+      (response) => {
+        this.ownlistService.updateOwnlistObservable(response.plantIds)
+        this.onOwnlist=false;
+      }
+    )
+  }
+
+  private checkPlantWishlist(): boolean {
     if(this.wishlist.length <= 0) {
       return false;
     }
     let plantIds = this.wishlist.filter(plantId => plantId == this.plant.id);
+    return plantIds.length > 0;
+  }  
+
+  private checkPlantOwnlist(): boolean {
+    if(this.ownlist.length <= 0) {
+      return false;
+    }
+    let plantIds = this.ownlist.filter(plantId => plantId == this.plant.id);
     return plantIds.length > 0;
   }
 }
