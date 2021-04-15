@@ -21,6 +21,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { UpdateFamilyComponent } from './components/update-family/update-family.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdatePlantComponent } from './components/update-plant/update-plant.component';
+import { EditUserComponent } from './components/edit-user/edit-user.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { UpdatePlantComponent } from './components/update-plant/update-plant.com
     PlantInfoComponent,
     AddPlantFamilyComponent,
     UpdateFamilyComponent,
-    UpdatePlantComponent
+    UpdatePlantComponent,
+    EditUserComponent
   ],
   imports: [
     NgbModule,

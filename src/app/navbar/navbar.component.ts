@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Plant } from '../model/plant';
 import { Family } from '../model/family';
 import { UpdatePlantComponent } from '../components/update-plant/update-plant.component';
+import { EditUserComponent } from '../components/edit-user/edit-user.component';
 
 @Component({
   selector: 'app-navbar',
@@ -69,6 +70,11 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(UpdatePlantComponent);
     modalRef.componentInstance.plant = new Plant(0,'','','',false,null, new Family(0,'',[]));
     modalRef.componentInstance.family = new Family(0,'',[]);
+  }
+
+  public openEditUserModal() {
+    const modalRef = this.modalService.open(EditUserComponent);
+    modalRef.componentInstance.user = JSON.parse(localStorage.getItem('loggedInUser'));
   }
 
 }
