@@ -23,53 +23,56 @@ export class PlantInfoComponent implements OnInit {
   public popoverMessage = 'Are you sure you want to delete this plant?';
   public confirmText = 'Delete';
   public cancelText = 'Cancel';
-  public confirmClicked=false;
-  public cancelClicked=false;
-  public onWishlist=false;
-  public onOwnlist=false;
-  
+  public confirmClicked = false;
+  public cancelClicked = false;
+  public onWishlist = false;
+  public onOwnlist = false;
+
   private wishlist: number[] = [];
   private ownlist: number[] = [];
 
   constructor(
-    private authService: AuthenticationService, 
-    private plantService: PlantService, 
+    private authService: AuthenticationService,
+    private plantService: PlantService,
     private familyService: FamilyService,
     public modalService: NgbModal,
     private wishlistService: WishlistService,
     private ownlistService: OwnlistService
-    ) { }
+  ) { }
 
   ngOnInit(): void {
 
-    this.wishlistService.wishlist$.subscribe(
-      (response) => {
-        this.wishlist = response;
-        this.onWishlist= this.checkPlantWishlist();
-      }
-    );
+    if (this.isUserLoggedIn()) {
+      this.wishlistService.wishlist$.subscribe(
+        (response) => {
+          this.wishlist = response;
+          this.onWishlist = this.checkPlantWishlist();
+        }
+      );
 
-    this.wishlistService.getWishlist().subscribe(
-      (response)=> {
-        this.wishlist = response.plantIds;
-        this.onWishlist= this.checkPlantWishlist();
-      }
-    );
+      this.wishlistService.getWishlist().subscribe(
+        (response) => {
+          this.wishlist = response.plantIds;
+          this.onWishlist = this.checkPlantWishlist();
+        }
+      );
 
-    this.ownlistService.ownlist$.subscribe(
-      (response) => {
-        this.ownlist = response;
-        this.onOwnlist = this.checkPlantOwnlist();
-      }
-    );
+      this.ownlistService.ownlist$.subscribe(
+        (response) => {
+          this.ownlist = response;
+          this.onOwnlist = this.checkPlantOwnlist();
+        }
+      );
 
-    this.ownlistService.getOwnlist().subscribe(
-      (response)=> {
-        this.ownlist = response.plantIds;
-        this.onOwnlist= this.checkPlantOwnlist();
-      }
-    );
+      this.ownlistService.getOwnlist().subscribe(
+        (response) => {
+          this.ownlist = response.plantIds;
+          this.onOwnlist = this.checkPlantOwnlist();
+        }
+      );
 
+
+    }
 
   }
 
@@ -108,7 +111,7 @@ export class PlantInfoComponent implements OnInit {
     this.wishlistService.deletePlantFromWishlist(plant).subscribe(
       (response) => {
         this.wishlistService.updateWishlistObservable(response.plantIds)
-        this.onWishlist=false;
+        this.onWishlist = false;
       }
     )
   }
@@ -125,21 +128,21 @@ export class PlantInfoComponent implements OnInit {
     this.ownlistService.deletePlantFromOwnlist(plant).subscribe(
       (response) => {
         this.ownlistService.updateOwnlistObservable(response.plantIds)
-        this.onOwnlist=false;
+        this.onOwnlist = false;
       }
     )
   }
 
   private checkPlantWishlist(): boolean {
-    if(this.wishlist.length <= 0) {
+    if (this.wishlist.length <= 0) {
       return false;
     }
     let plantIds = this.wishlist.filter(plantId => plantId == this.plant.id);
     return plantIds.length > 0;
-  }  
+  }
 
   private checkPlantOwnlist(): boolean {
-    if(this.ownlist.length <= 0) {
+    if (this.ownlist.length <= 0) {
       return false;
     }
     let plantIds = this.ownlist.filter(plantId => plantId == this.plant.id);
