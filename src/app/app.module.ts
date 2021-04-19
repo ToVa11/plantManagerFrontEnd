@@ -22,6 +22,7 @@ import { UpdateFamilyComponent } from './components/update-family/update-family.
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdatePlantComponent } from './components/update-plant/update-plant.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
+import { UpdateUserProfileComponent } from './components/update-user-profile/update-user-profile.component';
 
 
 @NgModule({
@@ -34,7 +35,8 @@ import { EditUserComponent } from './components/edit-user/edit-user.component';
     AddPlantFamilyComponent,
     UpdateFamilyComponent,
     UpdatePlantComponent,
-    EditUserComponent
+    EditUserComponent,
+    UpdateUserProfileComponent
   ],
   imports: [
     NgbModule,
