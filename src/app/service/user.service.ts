@@ -15,4 +15,16 @@ export class UserService {
   public editUser(user: User) {
     return this.http.put<User>(`${this.host}/user/update`, user);
   }
+
+  
+  updateProfileImage(image: File, username: string) {
+    return this.http.post<User>(`${this.host}/user/updateProfileImage`, this.setFormData(image, username));
+  }
+
+  private setFormData(image: File, username: string): FormData {
+    const formData = new FormData();
+    formData.append('profileImage', image);
+    formData.append('username', username);
+    return formData;
+  }
 }

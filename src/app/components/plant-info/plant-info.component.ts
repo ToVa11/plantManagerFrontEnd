@@ -70,8 +70,6 @@ export class PlantInfoComponent implements OnInit {
           this.onOwnlist = this.checkPlantOwnlist();
         }
       );
-
-
     }
 
   }

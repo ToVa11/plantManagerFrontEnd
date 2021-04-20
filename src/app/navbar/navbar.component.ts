@@ -63,6 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public onLogout() {
     this.authService.clearUserAndTokenFromLocalStorage();
     this.userLoggedIn = false;
+    this.router.navigateByUrl("");
   }
 
 
