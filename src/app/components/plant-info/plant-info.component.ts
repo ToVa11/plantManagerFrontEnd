@@ -41,14 +41,21 @@ export class PlantInfoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.wishlistService.wishlist$.subscribe(
+      (response) => {
+        this.wishlist = response;
+        this.onWishlist = this.checkPlantWishlist();
+      }
+    );
+    
+    this.ownlistService.ownlist$.subscribe(
+      (response) => {
+        this.ownlist = response;
+        this.onOwnlist = this.checkPlantOwnlist();
+      }
+    );
 
     if (this.isUserLoggedIn()) {
-      this.wishlistService.wishlist$.subscribe(
-        (response) => {
-          this.wishlist = response;
-          this.onWishlist = this.checkPlantWishlist();
-        }
-      );
 
       this.wishlistService.getWishlist().subscribe(
         (response) => {
@@ -57,12 +64,6 @@ export class PlantInfoComponent implements OnInit {
         }
       );
 
-      this.ownlistService.ownlist$.subscribe(
-        (response) => {
-          this.ownlist = response;
-          this.onOwnlist = this.checkPlantOwnlist();
-        }
-      );
 
       this.ownlistService.getOwnlist().subscribe(
         (response) => {
