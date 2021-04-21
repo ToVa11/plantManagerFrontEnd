@@ -13,6 +13,7 @@ export class AuthenticationService {
   public host = environment.apiUrl;
   private token: string;
   private loggedInUsername: string;
+  private user: User;
   public jwtHelper: JwtHelperService = new JwtHelperService();
 
   constructor(private http: HttpClient) { }
@@ -48,5 +49,16 @@ export class AuthenticationService {
       return false;
     }
     return true;
+  }
+
+  public isUserSuperAdmin(): boolean {
+    this.user = JSON.parse(localStorage.getItem('loggedInUser'));
+    for (let role of this.user.roles){
+      console.log(role);
+      if(role == 'ROLE_SUPER_ADMIN') {
+        return true;
+      }
+    }
+    return false;
   }
 }
