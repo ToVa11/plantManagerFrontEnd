@@ -23,6 +23,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { UpdatePlantComponent } from './components/update-plant/update-plant.component';
 import { EditUserComponent } from './components/edit-user/edit-user.component';
 import { UpdateUserProfileComponent } from './components/update-user-profile/update-user-profile.component';
+import { UserListComponent } from './components/user-list/user-list.component';
+import { EditAuthoritiesComponent } from './components/edit-authorities/edit-authorities.component';
 
 
 @NgModule({
@@ -36,7 +38,9 @@ import { UpdateUserProfileComponent } from './components/update-user-profile/upd
     UpdateFamilyComponent,
     UpdatePlantComponent,
     EditUserComponent,
-    UpdateUserProfileComponent
+    UpdateUserProfileComponent,
+    UserListComponent,
+    EditAuthoritiesComponent
   ],
   imports: [
     NgbModule,

@@ -6,9 +6,10 @@ export class User {
   public email: string;
   public profileImageUrl: string;
   public password: string;
-  public wishlist: [];
-  public role: [];
-  public authorities: [];
+  public wishlist: [] = [];
+  public ownlist: [] = [];
+  public roles: string[] = [];
+  public authorities: [] = [];
 
   public isActive: boolean;
   public isNotLocked: boolean;
@@ -21,7 +22,8 @@ export class User {
     this.email='';
     this.profileImageUrl='';
     this.wishlist = [];
-    this.role= [];
+    this.ownlist = [];
+    this.roles= [];
     this.authorities=[];
   }
 }

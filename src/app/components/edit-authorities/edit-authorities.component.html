@@ -1,0 +1,25 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ user.username }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form class="form" role="form" #authoritiesForm="ngForm" ngForm (ngSubmit)="onUpdateAuthorities()">
+
+<div class="modal-body">
+  <div class="form-group">
+    <div *ngFor="let authority of authorities | keyvalue">
+      <input type="checkbox" name="authority"  [value]="authority.key" (change)="checkboxChanged($event.target)"
+      [(checked)]="selectedAuthorities[authority.key]"> 
+      {{ authority.value}} 
+    </div>
+    
+  </div>
+<!-- <p *ngFor="let authority of authorities | keyvalue">{{ authority.key }}  {{ authority.value}}</p> -->
+</div>
+<div class="modal-footer">
+  <button type="submit" class="btn btn-primary" [disabled]="">Update authorities</button>
+  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="dismissupdatePlantModalBtn"
+    (click)="activeModal.dismiss('Cross click')">Close</button>
+</div>
+</form>
